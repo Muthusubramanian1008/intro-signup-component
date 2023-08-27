@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="./images/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Mentor | Intro component with sign up form</title>
+</head>
+
+<body>
+  <main role="main">
+
+    <header>
+      <h1>Learn to code by watching others</h1>
+      <p>See how experienced developers solve problems in real-time. Watching scripted tutorials is great,but
+        understanding how developers think is invaluable. </p>
+    </header>
+
+    <div class="form-card" id="form">
+
+      <!--    Try Free Button    -->
+      <div class="try-free-button">
+        <p>
+          Try it free 7 days
+          <span>
+            then $20/mo. thereafter
+          </span>
+        </p>
+      </div>
+
+
+      <!--    HTML Form    -->
+      <form method="POST">
+
+
+        <div class="form-control">
+          <input type="text" id="fname" name="fname" placeholder="First Name">
+          <img src="images/icon-error.svg" alt="Error">
+          <span>Error message</span>
+        </div>
+
+        <div class="form-control">
+          <input type="text" id="lname" name="lname" placeholder="Last Name">
+          <img src="images/icon-error.svg" alt="Error">
+          <span>Error message</span>
+        </div>
+
+        <div class="form-control">
+          <input type="text" id="email" name="email" placeholder="Email Address">
+          <img src="images/icon-error.svg" alt="Error">
+          <span>Error message</span>
+        </div>
+
+        <div class="form-control">
+          <input type="password" id="password" name="password" placeholder="Password">
+          <img src="images/icon-error.svg" alt="Error">
+          <span>Error message</span>
+        </div>
+
+        <button class="sign-up-button" type="submit">
+          <div class="text">claim your free trial</div>
+        </button>
+
+        <p class="footer">By clicking the button, you are agreeing to our <a href="#">Terms and Services</a></p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+
+    const form = document.getElementById('form'),
+      firstName = document.getElementById('fname'),
+      lastName = document.getElementById('lname'),
+      email = document.getElementById('email'),
+      password = document.getElementById('password');
+
+
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      checkInput();
+    });
+
+
+    function setErrorFor(input, message) {
+      const formControl = input.parentElement;
+
+      const span = formControl.querySelector('span');
+
+      span.innerText = message;
+
+
+      formControl.className = 'form-control error'
+
+    }
+
+
+    function setSuccessFor(input) {
+      const formControl = input.parentElement;
+
+      formControl.className = 'form-control success';
+    }
+
+
+    function checkInput() {
+
+      const fNameValue = firstName.value.trim();
+      const lNameValue = lastName.value.trim();
+      const emailValue = email.value.trim();
+      const passwordValue = password.value.trim();
+
+      //First Name Validation
+      if (fNameValue === '') {
+
+        setErrorFor(firstName, "𝘍𝘪𝘳𝘴𝘵 𝘯𝘢𝘮𝘦 𝘤𝘢𝘯𝘯𝘰𝘵 𝘣𝘦 𝘦𝘮𝘱𝘵𝘺");
+      } else {
+
+        setSuccessFor(firstName);
+      }
+
+      //Last Name Validation
+      if (lNameValue === '') {
+
+        setErrorFor(lastName, '𝘓𝘢𝘴𝘵 𝘕𝘢𝘮𝘦 𝘤𝘢𝘯𝘯𝘰𝘵 𝘣𝘦 𝘦𝘮𝘱𝘵𝘺');
+      } else {
+
+        setSuccessFor(lastName);
+      }
+
+      //Email validation
+      if (emailValue === '') {
+
+        setErrorFor(email, '𝘌𝘮𝘢𝘪𝘭 𝘤𝘢𝘯𝘯𝘰𝘵 𝘣𝘦 𝘦𝘮𝘱𝘵𝘺');
+
+      } else if (!isEmailValid(emailValue)) {
+
+        setErrorFor(email, '𝘓𝘰𝘰𝘬𝘴 𝘭𝘪𝘬𝘦 𝘵𝘩𝘪𝘴 𝘪𝘴 𝘯𝘰𝘵 𝘢𝘯 𝘦𝘮𝘢𝘪𝘭');
+
+      } else {
+        setSuccessFor(email);
+      }
+
+      //Password Validation
+      if (passwordValue === '') {
+
+        setErrorFor(password, '𝘗𝘢𝘴𝘴𝘸𝘰𝘳𝘥 𝘤𝘢𝘯𝘯𝘰𝘵 𝘣𝘦 𝘦𝘮𝘱𝘵𝘺');
+      } else {
+
+        setSuccessFor(password);
+      }
+    }
+
+    /*
+     Check Email Value By Regex
+    * */
+    function isEmailValid(email) {
+      return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(email);
+
+    }
+  </script>
+  <div class="attribution">
+    <div class="footer">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a
+      href="https://muthusubramanian1008.github.io/Muthu-Personal-site/">Muthu Subramanian M</a>.
+    </div>
+  </div>
+</body>
+
+</html>
